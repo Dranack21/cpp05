@@ -14,8 +14,8 @@ class Bureaucrat
 		Bureaucrat(const Bureaucrat &copy);
 		Bureaucrat &operator=(const Bureaucrat &copy);
 
-		void	decrement_grade(int i);
-		void	increment_grade(int i);
+		void	decrement_grade();
+		void	increment_grade();
 
 		int	getGrade();
 		const std::string getName();

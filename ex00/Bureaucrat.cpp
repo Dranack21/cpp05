@@ -12,12 +12,12 @@ _name(str), _grade(i)
 		if (this->_grade >= 151)
 		{
 			this->_grade = 75;
-			throw Bureaucrat::GradeTooHighException();
+			throw Bureaucrat::GradeTooLowException();
 		}
 		 if (this->_grade <= 0)
 		 {
 			this->_grade = 75;
-			throw Bureaucrat::GradeTooLowException();
+			throw Bureaucrat::GradeTooHighException();
 		 }
 	}
 	catch(const Bureaucrat::GradeTooHighException &e)
@@ -53,33 +53,35 @@ const std::string Bureaucrat::getName()
 	return (this->_name);
 }
 
-void Bureaucrat::decrement_grade(int i)
+void Bureaucrat::decrement_grade()
 {
 	try
 	{
-		if (this->_grade - i <= 0)
+		std::cout << "Inside decrement function with " << this->getName() << std::endl;
+		if (this->_grade + 1 >= 151)
 			throw Bureaucrat::GradeTooLowException();
 		else
 		{
-			this->_grade = this->_grade - i;
+			this->_grade = this->_grade + 1;
 			std::cout << "New grade: " << this->_grade << std::endl;
 		}
 	}
-	catch(const Bureaucrat::GradeTooLowException &e)
+	catch(const Bureaucrat::GradeTooHighException &e)
 	{
 		std::cerr << e.what();
 	}
 }
 
-void Bureaucrat::increment_grade(int i)
+void Bureaucrat::increment_grade()
 {
 	try
 	{
-		if (this->_grade + i >= 151)
+		std::cout << "Inside increment function with " << this->getName() << std::endl;
+		if (this->_grade - 1 <= 0)
 			throw Bureaucrat::GradeTooHighException();
 		else
 		{
-			this->_grade = this->_grade + i;
+			this->_grade = this->_grade - 1;
 			std::cout << "New grade: " << this->_grade << std::endl;
 		}
 	}
@@ -100,6 +102,6 @@ const char	*Bureaucrat::GradeTooHighException::what() const throw()
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat *a)
 {
-	o << "Bureaucrat " << a->getName() << " grade: " << a->getGrade() << std::endl;
+	o << "Bureaucrat " << a->getName() << " grade: " << a->getGrade();
 	return (o);
 }
