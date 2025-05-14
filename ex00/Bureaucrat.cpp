@@ -65,7 +65,7 @@ void Bureaucrat::decrement_grade(int i)
 			std::cout << "New grade: " << this->_grade << std::endl;
 		}
 	}
-	catch(const Bureaucrat::GradeTooHighException &e)
+	catch(const Bureaucrat::GradeTooLowException &e)
 	{
 		std::cerr << e.what();
 	}
@@ -100,6 +100,6 @@ const char	*Bureaucrat::GradeTooHighException::what() const throw()
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat *a)
 {
-	o << "Bureaucrat " << a->getName() << ":\n\tgrade: " << a->getGrade() << std::endl;
+	o << "Bureaucrat " << a->getName() << " grade: " << a->getGrade() << std::endl;
 	return (o);
 }
