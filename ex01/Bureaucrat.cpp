@@ -44,6 +44,11 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 	return (*this);
 }
 
+void Bureaucrat::signForm(Form &paper)
+{
+	paper.beSigned(*this);
+}
+
 int Bureaucrat::getGrade()
 {
 	return (this->_grade);
@@ -102,6 +107,6 @@ const char	*Bureaucrat::GradeTooHighException::what() const throw()
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat *a)
 {
-	o << "Bureaucrat " << a->getName() << " grade: " << a->getGrade();
+	o << "Bureaucrat " << a->getName() << " grade: " << a->getGrade() << std::endl;
 	return (o);
 }

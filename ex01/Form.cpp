@@ -1,3 +1,4 @@
+#include "Bureaucrat.hpp"
 #include "Form.hpp"
 
 Form::Form():
@@ -16,9 +17,18 @@ _is_signed(false)
 	try
 	{
 		if (this->_sign > 150 || this->_execute > 150)
+			throw GradeTooLowException();
+		if (this->_sign < 0 || this->_execute < 0)
 			throw GradeTooHighException();
 	}
-	catch()
+	catch(Form::GradeTooLowException &e)
+	{
+		std::cout << e.what();
+	}
+	catch(Form::GradeTooHighException &e)
+	{
+		std::cout << e.what();
+	}
 }
 Form::~Form()
 {
@@ -36,15 +46,15 @@ Form &Form::operator=(const Form &other)
 		return *this;
 	return *this;
 }
-const std::string	Form::get_name()
+std::string	Form::get_name()
 {
 	return(this->_name);
 }
-const int	Form::get_sign()
+int Form::get_sign()
 {
 	return(this->_sign);
 }
-const int	Form::get_execute()
+int	Form::get_execute()
 {
 	return(this->_execute);
 }
@@ -55,7 +65,7 @@ bool	Form::get_bool()
 
 void Form::beSigned(Bureaucrat &Worker)
 {
-	if (this->_is_signed == true)
+	if (this->get_bool() == true)
 	{
 		std::cout << "Form " << this->get_name() << " has alredy been signed" << std::endl;
 		return ;
@@ -65,23 +75,28 @@ void Form::beSigned(Bureaucrat &Worker)
 		if (this->_sign <= Worker.getGrade())
 			throw Form::GradeTooLowException();
 		else
-			this->_is_signed== true;
+			this->_is_signed = true;
 	}
-	catch(Form::GradeTooHighException &e)
+	catch(Form::GradeTooLowException &e)
 	{
-		e.what();
+		std::cout << e.what();
 	}
 }
 
 
-
-
-const char *Form::GradeTooHighException::what() const
+const char *Form::GradeTooHighException::what() const throw()
 {
-	std::cout << "Form Grade Too High" << std::endl;
+	return("Form Grade Too High\n");
 }
 
-const char *Form::GradeTooLowException::what() const
+const char *Form::GradeTooLowException::what() const throw()
 {
-	std::cout << "Form Grade Too Low" << std::endl;
+	return("Form Grade Too Low\n");
+}
+
+
+std::ostream	&operator<<(std::ostream &o, Form *a)
+{
+	o << "Bureaucrat " << a->get_name() << " grade: " << a->get_sign() << std::endl;
+	return (o);
 }

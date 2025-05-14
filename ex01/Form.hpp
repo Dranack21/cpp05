@@ -2,6 +2,7 @@
 
 #include "Bureaucrat.hpp"
 
+class Bureaucrat; 
 class Form
 {
 	private:
@@ -11,9 +12,9 @@ class Form
 		bool				_is_signed;
 	public:
 
-		const std::string	get_name();
-		const	int			get_sign();
-		const	int			get_execute();
+		std::string	get_name();
+		int			get_sign();
+		int			get_execute();
 		bool				get_bool();
 
 		Form();
@@ -34,3 +35,5 @@ class Form
 				const char* what() const throw();
 		};
 };
+
+std::ostream	&operator<<(std::ostream &o, Form *b);

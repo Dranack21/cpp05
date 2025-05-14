@@ -1,41 +1,146 @@
 #include "Bureaucrat.hpp"
 
-int main()
+
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
+
+int main(void)
 {
 	{
-		Bureaucrat john("john", 1);
-		std::cout << &john << std::endl;
-		john.decrement_grade();
-		std::cout << &john << std::endl;
-		john.increment_grade();
-		std::cout << &john << std::endl;
-		john.increment_grade();
-		std::cout << &john << std::endl;
-		std::cout << std::endl << std::endl << std::endl ;
-	}
-	{
-		Bureaucrat eve("eve", 15);
-		std::cout << &eve << std::endl;
-		eve.decrement_grade();
-		std::cout << &eve << std::endl;
-		std::cout << std::endl << std::endl << std::endl ;
-	}
-	{
-		Bureaucrat bob("bob", 0);
-		std::cout << &bob << std::endl;
-		bob.decrement_grade();
-		std::cout << &bob << std::endl;
-		bob.increment_grade();
-		std::cout << &bob << std::endl;
-		std::cout << std::endl << std::endl << std::endl ;
-	}
-	{
-		Bureaucrat aaaa("aaaaa", 151);
-		std::cout << &aaaa << std::endl;
-		aaaa.decrement_grade();
-		std::cout << &aaaa << std::endl;
-		aaaa.increment_grade();
-		std::cout << &aaaa << std::endl;
-	}
-}
+		std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		Bureaucrat *a = new Bureaucrat();
+		Form *b = new Form();
+		std::cout << std::endl;
 
+		std::cout << "\033[34mTesting\033[0m" << std::endl;
+		std::cout << a;
+		std::cout << b;
+
+		try
+		{
+			b->beSigned(*a);
+		}
+		catch(Bureaucrat::GradeTooLowException &e)
+		{
+			std::cerr << a->getName() << " was not able to sign " << b->get_name() << ": " << e.what() << std::endl;
+		}
+
+		std::cout << b;
+		std::cout << std::endl;
+
+		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+		delete a;
+		delete b;
+		std::cout << std::endl;
+	}
+	std::cout << "-------------------------------------------------------" << std::endl;
+	{
+		std::cout << std::endl;
+
+		std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		Bureaucrat *a = new Bureaucrat("Assistant", 145);
+		Bureaucrat *b = new Bureaucrat("CEO", 1);
+		Form *c = new Form("Rent Contract", 140, 100);
+		std::cout << std::endl;
+
+		std::cout << "\033[34mTesting\033[0m" << std::endl;
+		std::cout << a;
+		std::cout << b;
+		std::cout << c;
+
+		// Assistant signs the Form
+		try
+		{
+			// c->beSigned(*a);
+			a->signForm(*c);
+		}
+		catch(Bureaucrat::GradeTooLowException &e)
+		{
+			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->get_name() << ": " << e.what() << "\033[0m" << std::endl;
+		}
+
+		// CEO signs the Form
+		std::cout << c;
+		try
+		{
+			c->beSigned(*b);
+			// b->signForm(*c);
+		}
+		catch(Bureaucrat::GradeTooLowException &e)
+		{
+			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->get_name() << ": " << e.what() << "\033[0m" << std::endl;
+		}
+		std::cout << c;
+
+		// try signing the from again
+		b->signForm(*c);
+		std::cout << std::endl;
+
+		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+		delete a;
+		delete b;
+		delete c;
+		std::cout << std::endl;
+	}
+	std::cout << "-------------------------------------------------------" << std::endl;
+	{
+		std::cout << std::endl;
+
+		std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		Form *a = NULL;
+
+		// sign-grade too high
+		try
+		{
+			a = new Form("form",160, 145);
+		}
+		catch (Form::GradeTooLowException &e)
+		{
+			std::cerr << "\033[33mConstructing default failed: " <<
+			e.what() << "\033[0m" << std::endl;
+		}
+
+		// exec-grade too high
+		try
+		{
+			a = new Form("forme ",145, 160);
+		}
+		catch (Form::GradeTooLowException &e)
+		{
+			std::cerr << "\033[33mConstructing default failed: " <<
+			e.what() << "\033[0m" << std::endl;
+		}
+
+		// sign-grade too low
+		try
+		{
+			a = new Form("ford", -15, 145);
+		}
+		catch (Form::GradeTooHighException &e)
+		{
+			std::cerr << "\033[33mConstructing default failed: " <<
+			e.what() << "\033[0m" << std::endl;
+		}
+
+		// exec-grade too low
+		try
+		{
+			a = new Form("formmm", 145, -15);
+		}
+		catch (Form::GradeTooHighException &e)
+		{
+			std::cerr << "\033[33mConstructing default failed: " <<
+			e.what() << "\033[0m" << std::endl;
+		}
+
+		// Deconstruction to prevent unused variable, in this case will never be called
+		if (a != NULL)
+		{
+			std::cout << std::endl;
+			std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+			delete a;
+		}
+		std::cout << std::endl;
+	}
+	return (0);
+}
