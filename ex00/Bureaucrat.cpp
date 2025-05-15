@@ -7,27 +7,18 @@ _name("default"), _grade(75)
 Bureaucrat::Bureaucrat(std::string str, int i):
 _name(str), _grade(i)
 {
-	try
+
+	if (this->_grade <= 0)
 	{
-		if (this->_grade >= 151)
-		{
-			this->_grade = 75;
-			throw Bureaucrat::GradeTooLowException();
-		}
-		 if (this->_grade <= 0)
-		 {
-			this->_grade = 75;
-			throw Bureaucrat::GradeTooHighException();
-		 }
+		this->_grade = 75;
+		throw Bureaucrat::GradeTooHighException();
 	}
-	catch(const Bureaucrat::GradeTooHighException &e)
+	if (this->_grade >= 151)
 	{
-		std::cerr << e.what();
+		this->_grade = 75;
+		throw Bureaucrat::GradeTooLowException();
 	}
-	catch(const Bureaucrat::GradeTooLowException &e)
-	{
-		std::cerr << e.what();
-	}
+
 }
 Bureaucrat::~Bureaucrat()
 {
@@ -55,8 +46,6 @@ const std::string Bureaucrat::getName()
 
 void Bureaucrat::decrement_grade()
 {
-	try
-	{
 		std::cout << "Inside decrement function with " << this->getName() << std::endl;
 		if (this->_grade + 1 >= 151)
 			throw Bureaucrat::GradeTooLowException();
@@ -65,17 +54,11 @@ void Bureaucrat::decrement_grade()
 			this->_grade = this->_grade + 1;
 			std::cout << "New grade: " << this->_grade << std::endl;
 		}
-	}
-	catch(const Bureaucrat::GradeTooHighException &e)
-	{
-		std::cerr << e.what();
-	}
 }
 
 void Bureaucrat::increment_grade()
 {
-	try
-	{
+
 		std::cout << "Inside increment function with " << this->getName() << std::endl;
 		if (this->_grade - 1 <= 0)
 			throw Bureaucrat::GradeTooHighException();
@@ -84,11 +67,8 @@ void Bureaucrat::increment_grade()
 			this->_grade = this->_grade - 1;
 			std::cout << "New grade: " << this->_grade << std::endl;
 		}
-	}
-	catch(const Bureaucrat::GradeTooHighException &e)
-	{
-		std::cerr << e.what();
-	}
+	
+
 }
 const char	*Bureaucrat::GradeTooLowException::what() const throw()
 {

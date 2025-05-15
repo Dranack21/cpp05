@@ -20,13 +20,13 @@ class Bureaucrat
 		int	getGrade();
 		const std::string getName();
 
-		class GradeTooLowException: std::exception
+		class GradeTooLowException: public std::exception
 		{
 			public:
 				const char* what() const throw();
 		};
 
-		class GradeTooHighException: std::exception
+		class GradeTooHighException: public std::exception
 		{
 			public:
 				const char* what() const throw();
