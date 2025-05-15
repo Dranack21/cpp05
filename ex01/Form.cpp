@@ -61,6 +61,7 @@ int	Form::get_execute()
 bool	Form::get_bool()
 {
 	return (this->_is_signed);
+
 }
 
 void Form::beSigned(Bureaucrat &Worker)
@@ -72,13 +73,17 @@ void Form::beSigned(Bureaucrat &Worker)
 	}
 	try
 	{
-		if (this->_sign <= Worker.getGrade())
-			throw Form::GradeTooLowException();
+		if (this->_sign < Worker.getGrade())
+			throw Form::GradeTooHighException();
 		else
+		{
 			this->_is_signed = true;
+			std::cout << Worker.getName() << " signed " << this->_name << " form" << std::endl;
+		}
 	}
-	catch(Form::GradeTooLowException &e)
+	catch(Form::GradeTooHighException &e)
 	{
+		std::cout << Worker.getName() << " cannot sign " << this->_name << " form because ";
 		std::cout << e.what();
 	}
 }
@@ -97,6 +102,6 @@ const char *Form::GradeTooLowException::what() const throw()
 
 std::ostream	&operator<<(std::ostream &o, Form *a)
 {
-	o << "Bureaucrat " << a->get_name() << " grade: " << a->get_sign() << std::endl;
+	o << "Bureaucrat " << a->get_name() << " minimum required grade: " << a->get_sign() << std::endl;
 	return (o);
 }
