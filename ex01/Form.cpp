@@ -14,21 +14,11 @@ _sign(sign),
 _execute(execute),
 _is_signed(false)
 {
-	try
-	{
-		if (this->_sign > 150 || this->_execute > 150)
-			throw GradeTooLowException();
-		if (this->_sign < 0 || this->_execute < 0)
-			throw GradeTooHighException();
-	}
-	catch(Form::GradeTooLowException &e)
-	{
-		std::cout << e.what();
-	}
-	catch(Form::GradeTooHighException &e)
-	{
-		std::cout << e.what();
-	}
+	
+	if (this->_sign > 150 || this->_execute > 150)
+		throw GradeTooLowException();
+	if (this->_sign < 0 || this->_execute < 0)
+		throw GradeTooHighException();
 }
 Form::~Form()
 {
@@ -71,20 +61,15 @@ void Form::beSigned(Bureaucrat &Worker)
 		std::cout << "Form " << this->get_name() << " has alredy been signed" << std::endl;
 		return ;
 	}
-	try
+	if (this->_sign < Worker.getGrade())
 	{
-		if (this->_sign < Worker.getGrade())
-			throw Form::GradeTooHighException();
-		else
-		{
-			this->_is_signed = true;
-			std::cout << Worker.getName() << " signed " << this->_name << " form" << std::endl;
-		}
+		std::cout << "Could not sign " << this->_name <<" because " << Worker.getName() << " grade is too low" << std::endl;
+		throw Form::GradeTooLowException();
 	}
-	catch(Form::GradeTooHighException &e)
+	else
 	{
-		std::cout << Worker.getName() << " cannot sign " << this->_name << " form because ";
-		std::cout << e.what();
+		this->_is_signed = true;
+		std::cout << Worker.getName() << " signed " << this->_name << " form" << std::endl;
 	}
 }
 
