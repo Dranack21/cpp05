@@ -99,7 +99,11 @@ void	Bureaucrat::executeForm(Aform const & form)
 		std::cout << this->_name << " Cannot execute the form grade too low" << std::endl;
 	}
 	else
+	{
+		std::cout << "\033[35m" << std::endl  << this->_name << " Is about to execute form " << form.get_name() << std::endl << "\033[0m";
 		form.Be_Executed();
+		std::cout  << std::endl;
+	}
 }
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat *a)

@@ -77,22 +77,22 @@ void Aform::beSigned(Bureaucrat &Worker)
 
 const char *Aform::GradeTooHighException::what() const throw()
 {
-	return("Aform Grade Too High\n");
+	return("\033[33mAform Grade Too High\033[0m\n");
 }
 
 const char *Aform::GradeTooLowException::what() const throw()
 {
-	return("Aform Grade Too Low\n");
+	return("\033[33mAform Grade Too Low\033[0m\n");
 }
 
 const char *Aform::NotSigned::what() const throw()
 {
-	return("\031[34mForm is not signed cannot execute\031[0m\n");
+	return("\033[31mForm is not signed cannot execute\033[0m\n");
 }
 
 const char*Aform::NoExecute::what() const throw()
 {
-	return("\031[34mForm cannot be executed cause executor grade is too low\031[0m\n");
+	return("\033[31mForm cannot be executed cause executor grade is too low\033[0m\n");
 }
 
 void	Aform::execute(Bureaucrat const &executor) const
@@ -100,7 +100,7 @@ void	Aform::execute(Bureaucrat const &executor) const
 	if (this->_sign == false)
 		throw Aform::NotSigned();
 	if (this->_execute < executor.getGrade())
-		throw Aform::GradeTooHighException();
+		throw Aform::NoExecute();
 	else
 	{
 		std::cout << executor.getName() << "is going to execute Form" << this->_name << std::endl;
