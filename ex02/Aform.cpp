@@ -36,19 +36,20 @@ Aform &Aform::operator=(const Aform &other)
 		return *this;
 	return *this;
 }
-std::string	Aform::get_name()
+
+std::string	Aform::get_name()const
 {
 	return(this->_name);
 }
-int Aform::get_sign()
+int Aform::get_sign()const
 {
 	return(this->_sign);
 }
-int	Aform::get_execute()
+int	Aform::get_execute()const
 {
 	return(this->_execute);
 }
-bool	Aform::get_bool()
+bool	Aform::get_bool()const
 {
 	return (this->_is_signed);
 
@@ -84,7 +85,28 @@ const char *Aform::GradeTooLowException::what() const throw()
 	return("Aform Grade Too Low\n");
 }
 
+const char *Aform::NotSigned::what() const throw()
+{
+	return("\031[34mForm is not signed cannot execute\031[0m\n");
+}
 
+const char*Aform::NoExecute::what() const throw()
+{
+	return("\031[34mForm cannot be executed cause executor grade is too low\031[0m\n");
+}
+
+void	Aform::execute(Bureaucrat const &executor) const
+{
+	if (this->_sign == false)
+		throw Aform::NotSigned();
+	if (this->_execute < executor.getGrade())
+		throw Aform::GradeTooHighException();
+	else
+	{
+		std::cout << executor.getName() << "is going to execute Form" << this->_name << std::endl;
+		this->Be_Executed();
+	}
+}
 std::ostream	&operator<<(std::ostream &o, Aform *a)
 {
 	o << "Bureaucrat " << a->get_name() << " minimum required grade: " << a->get_sign() << std::endl;

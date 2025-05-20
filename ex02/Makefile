@@ -8,7 +8,10 @@ NAME    = a.out
 
 SRCS    = main.cpp \
 			Bureaucrat.cpp\
-			Aform.cpp
+			Aform.cpp\
+			PresidentialPardonForm.cpp\
+			RobotomyRequestForm.cpp\
+			ShurbberyCreationForm.cpp
 			
 ### OBJS ###########################################################################
 

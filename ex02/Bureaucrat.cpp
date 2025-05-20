@@ -45,11 +45,11 @@ void Bureaucrat::signAform(Aform &paper)
 	}
 }
 
-int Bureaucrat::getGrade()
+int Bureaucrat::getGrade() const
 {
 	return (this->_grade);
 }
-const std::string Bureaucrat::getName()
+const std::string Bureaucrat::getName() const
 {
 	return (this->_name);
 }
@@ -85,6 +85,21 @@ const char	*Bureaucrat::GradeTooLowException::what() const throw()
 const char	*Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return("Grade Too High\n");
+}
+
+void	Bureaucrat::executeForm(Aform const & form)
+{
+	if (form.get_sign() == false)
+	{
+		std::cout << this->_name << " Could not execute the form it is not signed yet" << std::endl;
+		return ;
+	}
+	if (form.get_execute() < this->_grade)
+	{
+		std::cout << this->_name << " Cannot execute the form grade too low" << std::endl;
+	}
+	else
+		form.Be_Executed();
 }
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat *a)

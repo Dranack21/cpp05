@@ -11,11 +11,10 @@ class Aform
 		const int 			_execute;
 		bool				_is_signed;
 	public:
-
-		std::string	get_name();
-		int			get_sign();
-		int			get_execute();
-		bool				get_bool();
+		std::string	get_name()const;
+		int			get_sign()const;
+		int			get_execute()const;
+		bool		get_bool()const;
 
 		Aform();
 		Aform(std::string str, int sign, int execute);
@@ -24,13 +23,24 @@ class Aform
 		Aform &operator=(const Aform &other);
 		void	beSigned(Bureaucrat &Worker);
 		
-		virtual void execute(Bureaucrat const & executor) const = 0;
+		void execute(Bureaucrat const & executor) const;
+		virtual void Be_Executed()const = 0;
 		class GradeTooHighException: public std::exception
 		{
 			public:
 				const char* what() const throw();
 		};
 		class GradeTooLowException: public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
+		class NotSigned: public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
+		class NoExecute: public std::exception
 		{
 			public:
 				const char* what() const throw();

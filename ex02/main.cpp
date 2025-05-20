@@ -1,20 +1,21 @@
 #include "Bureaucrat.hpp"
-
-
-#include "Bureaucrat.hpp"
 #include "Aform.hpp"
+#include "ShurbberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+
 
 int main(void)
 {
 	try 
 	{
+		std::string target = "Bob";
+
 		Bureaucrat guy("Important guy", 2);
-		Bureaucrat intern("Intern john", 1800);
-		Aform papier("Important Paper", 149, 20);
-		std::cout << &intern;
-		std::cout << &papier;
-		intern.signAform(papier);
+		PresidentialPardonForm papier(target);
 		guy.signAform(papier);
+		guy.executeForm(papier);
+		
 	}
 	catch(const std::exception &e)
 	{

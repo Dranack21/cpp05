@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Aform.hpp"
+#include "Bureaucrat.hpp"
 
 class RobotomyRequestForm: public Aform
 {
 	private:
-
+		const std::string _target;
 	public:
 		RobotomyRequestForm();
 		RobotomyRequestForm(std::string &target);
 		~RobotomyRequestForm();
 		RobotomyRequestForm(const RobotomyRequestForm &other);
 		RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
-		void execute(Bureaucrat const & executor) const;
+		void Be_Executed()const;
 };

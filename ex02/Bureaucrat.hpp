@@ -2,10 +2,10 @@
 
 #include <iostream>
 #include "Aform.hpp"
-
-
+#include <fstream>
 class Aform; 
 class Bureaucrat
+
 {
 	private:
 		const std::string	_name;
@@ -21,9 +21,10 @@ class Bureaucrat
 		void	decrement_grade();
 		void	increment_grade();
 		void 	signAform(Aform &Aform);
-
-		const std::string	getName();
-		int					getGrade();
+		void	executeForm(Aform const & form);
+	
+		const std::string	getName()	const;
+		int					getGrade()	const;
 		class GradeTooLowException: public std::exception
 		{
 			public:
