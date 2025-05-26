@@ -6,7 +6,7 @@ _target("default target")
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string &target):
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target):
 Aform("default", 145, 137),
 _target(target)
 {

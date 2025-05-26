@@ -20,7 +20,7 @@ class Bureaucrat
 
 		void	decrement_grade();
 		void	increment_grade();
-		void 	signAform(Aform &Aform);
+		void 	signform(Aform &Aform);
 		void	executeForm(Aform const & form);
 	
 		const std::string	getName()	const;

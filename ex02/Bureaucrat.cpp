@@ -33,7 +33,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 	return (*this);
 }
 
-void Bureaucrat::signAform(Aform &paper)
+void Bureaucrat::signform(Aform &paper)
 {
 	try
 	{

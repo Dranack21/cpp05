@@ -6,7 +6,7 @@ _target("default target")
 {
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string &target):
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target):
 Aform("default", 25, 5),
 _target(target)
 {
