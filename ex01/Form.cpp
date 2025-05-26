@@ -69,7 +69,7 @@ void Form::beSigned(Bureaucrat &Worker)
 	else
 	{
 		this->_is_signed = true;
-		std::cout << Worker.getName() << " signed " << this->_name << " form" << std::endl;
+		std::cout << "\033[37m" << Worker.getName() << " signed " << this->_name << " form\033[0m" << std::endl;
 	}
 }
 
@@ -87,6 +87,6 @@ const char *Form::GradeTooLowException::what() const throw()
 
 std::ostream	&operator<<(std::ostream &o, Form *a)
 {
-	o << "Bureaucrat " << a->get_name() << " minimum required grade: " << a->get_sign() << std::endl;
+	o << "\033[33mForm " << a->get_name() << " minimum required grade: " << a->get_sign() << "\033[0m" << std::endl;
 	return (o);
 }

@@ -109,6 +109,6 @@ void	Aform::execute(Bureaucrat const &executor) const
 }
 std::ostream	&operator<<(std::ostream &o, Aform *a)
 {
-	o << "Bureaucrat " << a->get_name() << " minimum required grade: " << a->get_sign() << std::endl;
+	o << "Form " << a->get_name() << " minimum required grade: " << a->get_sign() << std::endl;
 	return (o);
 }
