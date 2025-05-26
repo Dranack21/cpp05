@@ -22,7 +22,7 @@ int main()
         Aform* robotomyForm = intern.makeForm("robotomy request", "Robot");
         std::cout << robotomyForm << std::endl;
         
-         std::cout << "--- Creating a pardon from intern's makeForm ---" << std::endl;
+         std::cout << "--- Creating a presidential pardon from intern's makeForm ---" << std::endl;
         Aform* pardonForm = intern.makeForm("presidential pardon", "President");
         std::cout << pardonForm << std::endl;
 
@@ -35,8 +35,8 @@ int main()
 
         Aform* nonExistantForm = intern.makeForm("non-existant form", "Target");
     
-        std::cout << &nonExistantForm << std::endl; // <--- this line should not be reached
-        delete nonExistantForm; // <--- same
+        std::cout << &nonExistantForm << std::endl; //never reach that line cause we throw
+        delete nonExistantForm; //never reach that line cause we throw
 
     } catch (std::exception& e) {
         std::cout << "\nException caught: " << e.what() << std::endl;

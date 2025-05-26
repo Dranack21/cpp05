@@ -24,7 +24,7 @@ Intern &Intern::operator=(const Intern& other)
 
 Aform *Intern::makeForm(const std::string &type, const std::string &target)
 {
-	const std::string array[] = {"robotomy request", "presidential pardon", "shrubbery creation"};
+	const std::string array[] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 
 		
 	Aform* (Intern::*formCreators[])(const std::string&) const = {
