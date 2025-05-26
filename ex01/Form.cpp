@@ -17,7 +17,7 @@ _is_signed(false)
 	
 	if (this->_sign > 150 || this->_execute > 150)
 		throw GradeTooLowException();
-	if (this->_sign < 0 || this->_execute < 0)
+	if (this->_sign < 1 || this->_execute < 1)
 		throw GradeTooHighException();
 }
 Form::~Form()
@@ -63,7 +63,7 @@ void Form::beSigned(Bureaucrat &Worker)
 	}
 	if (this->_sign < Worker.getGrade())
 	{
-		std::cout << "Could not sign " << this->_name <<" because " << Worker.getName() << " grade is too low" << std::endl;
+		std::cout << "\033[31mCould not sign " << this->_name <<" because " << Worker.getName() << " grade is too low about to throw Form to low as asked in subject\033[0m" << std::endl;
 		throw Form::GradeTooLowException();
 	}
 	else
@@ -76,12 +76,12 @@ void Form::beSigned(Bureaucrat &Worker)
 
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return("Form Grade Too High\n");
+	return("\033[33mForm Grade Too High\033[0m\n");
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return("Form Grade Too Low\n");
+	return("\033[36mForm Grade Too Low\033[0m\n");
 }
 
 

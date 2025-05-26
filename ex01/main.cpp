@@ -9,8 +9,9 @@ int main(void)
 	try 
 	{
 		Bureaucrat guy("Important guy", 2);
-		Bureaucrat intern("Intern john", 1800);
-		Form papier("Important Paper", 149, 20);
+		Bureaucrat intern("Intern john", 150);
+		Form papier("Important Paper", 150, 20);
+		Form papier2("Important Paper2", 150, 20);
 		std::cout << &intern;
 		std::cout << &papier;
 		intern.signForm(papier);

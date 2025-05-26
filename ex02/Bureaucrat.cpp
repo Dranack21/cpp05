@@ -9,12 +9,10 @@ _name(str), _grade(i)
 {
 	if (this->_grade >= 151)
 	{
-		this->_grade = 75;
 		throw Bureaucrat::GradeTooLowException();
 	}
 	if (this->_grade <= 0)
 	{
-		this->_grade = 75;
 		throw Bureaucrat::GradeTooHighException();
 	}
 }

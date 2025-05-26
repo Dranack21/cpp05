@@ -3,6 +3,8 @@
 #include "ShurbberyCreationForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include <cstdlib>
+#include <ctime>
 
 int main()
 {   
@@ -19,6 +21,7 @@ int main()
         std::cout << "\n===== SUCCESSFUL EXECUTION TESTS =====" << std::endl;
         
         std::cout << "\n>> Testing ShrubberyCreationForm (should succeed):" << std::endl;
+        lowLevel.signform(shrub);
         lowLevel.signform(shrub);
         midLevel.executeForm(shrub);
         

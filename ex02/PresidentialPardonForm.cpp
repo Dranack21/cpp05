@@ -1,13 +1,13 @@
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm():
-Aform("default", 25, 5),
+Aform("PresidentialPardonForm", 25, 5),
 _target("default target")
 {
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string &target):
-Aform("default", 25, 5),
+Aform("PrensidentialPardonForm", 25, 5),
 _target(target)
 {
 }

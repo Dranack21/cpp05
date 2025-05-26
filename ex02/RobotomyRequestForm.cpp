@@ -1,14 +1,15 @@
 #include "RobotomyRequestForm.hpp"
 #include <cstdlib>
+#include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm():
-Aform("default", 72, 45),
+Aform("RobotomyRequestForm", 72, 45),
 _target("default target")
 {
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target):
-Aform("default", 72, 45),
+Aform("RobotomyRequestForm", 72, 45),
 _target(target)
 {
 }
@@ -38,6 +39,7 @@ void  RobotomyRequestForm::Be_Executed() const
 {
 	int i;
 
+	std::srand(static_cast<unsigned int>(std::time(NULL)));
 	i = rand();
 	if (i%2 == 0)
 		std::cout << this->_target << " Has been robotomized" << std::endl;

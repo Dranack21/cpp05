@@ -17,7 +17,7 @@ _is_signed(false)
 	
 	if (this->_sign > 150 || this->_execute > 150)
 		throw GradeTooLowException();
-	if (this->_sign < 0 || this->_execute < 0)
+	if (this->_sign <= 0 || this->_execute <= 0)
 		throw GradeTooHighException();
 }
 Aform::~Aform()
