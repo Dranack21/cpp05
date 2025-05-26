@@ -4,16 +4,6 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 
-
-#include "Bureaucrat.hpp"
-#include "Aform.hpp"
-#include "ShurbberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-
 int main()
 {   
     try {
